@@ -1,0 +1,48 @@
+[
+  {
+    "_id": "sr_no",
+    "label": "Sr No",
+    "maxWidth": 50,
+    "align": "center",
+    "color": "#000",
+    "fontWeight": "bold",
+    "textTransform": "capitalize"
+  },
+  {
+    "_id": "name",
+    "label": "User Name",
+    "maxWidth": 200,
+    "align": "center",
+    "color": "#000",
+    "fontWeight": "bold",
+    "textTransform": "capitalize"
+  },
+  {
+    "_id": "email",
+    "label": "User Email",
+    "maxWidth": 150,
+    "align": "center",
+    "color": "#000",
+    "fontWeight": "bold",
+    "textTransform": "none"
+  },
+  {
+    "_id": "status",
+    "label": "Status",
+    "maxWidth": 100,
+    "align": "center",
+    "color": "#000",
+    "fontWeight": "bold",
+    "textTransform": "capitalize"
+  },
+  {
+    "_id": "actions",
+    "label": "Action",
+    "maxWidth": 100,
+    "align": "center",
+    "color": "#000",
+    "fontWeight": "bold",
+    "textTransform": "bold",
+    "fontSize": "14px"
+  }
+]
