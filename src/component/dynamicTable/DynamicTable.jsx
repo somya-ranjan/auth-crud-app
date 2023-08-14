@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { nanoid } from "nanoid";
 import NoData from "../errorPage/NoData";
+import RenderIf from "../RenderIf";
 
 function DynamicTable(props) {
   const {
@@ -53,13 +54,13 @@ function DynamicTable(props) {
           </TableRow>
         </TableHead>
         <TableBody sx={{ background: "#edf6f9" }}>
-          {!rows?.length ? (
+          <RenderIf render={!isLoading && !rows?.length}>
             <NoData />
-          ) : (
-            rows?.map((item) => (
-              <TableRow key={nanoid()}>
-                {column.map((label) => {
-                  return (
+          </RenderIf>
+          {isLoading
+            ? [...new Array(4)].map(() => (
+                <TableRow key={nanoid()}>
+                  {column.map((label) => (
                     <TableCell
                       key={nanoid()}
                       sx={{
@@ -68,17 +69,29 @@ function DynamicTable(props) {
                         textTransform: label.textTransform,
                       }}
                     >
-                      {isLoading ? (
-                        <Box fullWidth className="skeleton" />
-                      ) : (
-                        item[label._id]
-                      )}
+                      <Box fullWidth className="skeleton" />
                     </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))
-          )}
+                  ))}
+                </TableRow>
+              ))
+            : rows?.map((item) => (
+                <TableRow key={nanoid()}>
+                  {column.map((label) => {
+                    return (
+                      <TableCell
+                        key={nanoid()}
+                        sx={{
+                          width: label.maxWidth,
+                          textAlign: label.align,
+                          textTransform: label.textTransform,
+                        }}
+                      >
+                        {item[label._id]}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              ))}
         </TableBody>
       </Table>
       {rows?.length ? (
