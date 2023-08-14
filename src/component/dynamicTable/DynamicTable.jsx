@@ -24,7 +24,6 @@ function DynamicTable(props) {
     totalItem,
     isLoading,
   } = props;
-
   return (
     <TableContainer
       component={Paper}
@@ -54,7 +53,7 @@ function DynamicTable(props) {
           </TableRow>
         </TableHead>
         <TableBody sx={{ background: "#edf6f9" }}>
-          {rows?.length === 0 ? (
+          {!rows?.length ? (
             <NoData />
           ) : (
             rows?.map((item) => (
@@ -82,13 +81,13 @@ function DynamicTable(props) {
           )}
         </TableBody>
       </Table>
-      {rows?.length !== 0 && (
+      {rows?.length ? (
         <TablePagination
           sx={{
             backgroundColor: "#edf6f9",
             position: "sticky",
             top: rows?.length <= 5 && "100%",
-            bottom: rows?.length > 5 && "0%",
+            bottom: rows?.length > 5 && "0",
             left: "0",
           }}
           component="div"
@@ -99,7 +98,7 @@ function DynamicTable(props) {
           onRowsPerPageChange={handleChangeRowsPerPage}
           rowsPerPageOptions={[5, 15, 30, 50]}
         />
-      )}
+      ) : null}
     </TableContainer>
   );
 }

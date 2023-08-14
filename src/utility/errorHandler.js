@@ -1,6 +1,6 @@
 import toaster from "./toaster";
 
-export default function* errorHandler({ response = "" }) {
+export default function errorHandler({ response = "" }) {
   if (
     response !== undefined &&
     response !== undefined &&

@@ -14,6 +14,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { primaryBtn } from "../../assets/style/Btn";
 import { useGetUserDetailsQuery } from "../../store/services";
 import BlockUnBlockUser from "../../component/popUpModal/BlockUnBlockUser";
+import { VITE_APP_IMG_URL } from "../../utility/envConfig";
 
 function UserDetails() {
   // // initial state
@@ -64,7 +65,7 @@ function UserDetails() {
             }}
           >
             <img
-              src={`https://i.pravatar.cc/300?img?img=${id}`}
+              src={`${VITE_APP_IMG_URL}img=${id}`}
               style={{ maxWidth: "200px", borderRadius: "10px" }}
             />
             <Box

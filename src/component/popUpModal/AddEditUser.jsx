@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   Box,
@@ -11,7 +11,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import {LoadingButton} from "@mui/lab";
+import { LoadingButton } from "@mui/lab";
 import { CustomDialogueComponent } from "../modal/Modal";
 import { primaryBtn, RedBtn } from "../../assets/style/Btn.js";
 import { useFormik } from "formik";
@@ -22,8 +22,9 @@ import toaster from "../../utility/toaster";
 function AddEditUser({ modalOpen, onClose, label, selectedData }) {
   // // initial state
   // // redux state
-  const [addUser, { isLoading }] = useAddUserMutation();
-  const [editUser, { isLoading: editLoading }] = useEditUserMutation();
+  const [addUser, { isLoading, isSuccess }] = useAddUserMutation();
+  const [editUser, { isLoading: editLoading, isSuccess: editUserSauces }] =
+    useEditUserMutation();
   // local state
   const initName = label === "editUser" ? selectedData?.name : "";
   const initEmail = label === "editUser" ? selectedData?.email : "";
@@ -44,19 +45,23 @@ function AddEditUser({ modalOpen, onClose, label, selectedData }) {
     },
     enableReinitialize: true,
     validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       if (label === "addUser") {
-        await addUser(values);
-        toaster.success("User added successfully");
+        addUser(values);
       } else {
-        await editUser({ userData: values, currentId: selectedData.id });
-        toaster.success("User edited successfully");
+        editUser({ userData: values, currentId: selectedData.id });
       }
-      onClose(values);
-      formik.resetForm();
     },
   });
-
+  useEffect(() => {
+    if (isSuccess) {
+      toaster.success("User added successfully");
+    } else if (editUserSauces) {
+      toaster.success("User edited successfully");
+    }
+    onClose();
+    formik.resetForm();
+  }, [isSuccess, editUserSauces]);
   return (
     <CustomDialogueComponent
       open={modalOpen}

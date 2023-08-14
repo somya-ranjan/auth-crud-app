@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab/";
 import { CustomDialogueComponent } from "../modal/Modal";
@@ -8,14 +8,18 @@ import toaster from "../../utility/toaster";
 
 function DeleteUser({ isOpen, onClose, selectedId }) {
   // // redux state
-  const [deleteUser, { isLoading }] = useDeleteUserMutation();
+  const [deleteUser, { isLoading, isSuccess }] = useDeleteUserMutation();
 
   // // function
   const handelDelete = async () => {
     await deleteUser({ currentId: selectedId });
-    toaster.success("User deleted successfully");
-    onClose();
   };
+  useEffect(() => {
+    if (isSuccess) {
+      toaster.success("User deleted successfully");
+      onClose();
+    }
+  }, [isSuccess]);
   return (
     <CustomDialogueComponent
       open={isOpen}

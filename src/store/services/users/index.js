@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import toaster from "../../../utility/toaster";
+import { VITE_APP_API_URL } from "../../../utility/envConfig";
+import errorHandler from "../../../utility/errorHandler";
 
 export const usersService = createApi({
   reducerPath: "userService",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/",
+    baseUrl: VITE_APP_API_URL,
   }),
   tagTypes: ["Users", "Status Update"],
   endpoints: (builder) => ({
@@ -39,8 +41,9 @@ export const usersService = createApi({
           body: user,
         };
       },
-      transformErrorResponse: (response) =>
-        toaster.error(response?.data?.message),
+      transformErrorResponse: (response) => {
+        errorHandler(response);
+      },
       invalidatesTags: ["Users"],
     }),
     editUser: builder.mutation({

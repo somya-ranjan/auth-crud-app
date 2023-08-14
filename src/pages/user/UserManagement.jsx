@@ -133,6 +133,7 @@ function Main() {
               handelAddEmployee={() =>
                 setModalOpen({ open: true, currentID: "", type: "addUser" })
               }
+              disableExportBtn={!rows?.length}
             />
 
             <DynamicTable

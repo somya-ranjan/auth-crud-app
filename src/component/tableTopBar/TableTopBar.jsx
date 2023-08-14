@@ -20,6 +20,7 @@ function TableTopBar(props) {
     handleSearch,
     search,
     handelAddEmployee,
+    disableExportBtn,
   } = props;
   // // style
   const btnStyle = {
@@ -100,8 +101,9 @@ function TableTopBar(props) {
             <Button
               variant="contained"
               fullWidth
-              sx={btnStyle}
+              sx={{ ...btnStyle, borderColor: disableExportBtn && "lightgray" }}
               onClick={handelExportData}
+              disabled={disableExportBtn}
             >
               {btnName}
             </Button>
