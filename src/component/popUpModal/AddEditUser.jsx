@@ -74,13 +74,12 @@ function AddEditUser({ modalOpen, onClose, label, selectedData }) {
           : null
       }
     >
-      <Stack spacing={2} component="form" onSubmit={formik.handleSubmit}>
+      <Stack spacing={2} component="form" onSubmit={formik.handleSubmit} pt={2}>
         <TextField
           name="name"
           id="demo-helper-text-aligned"
           label={nameLabel}
           fullWidth
-          sx={{ marginTop: "10px" }}
           size="small"
           value={formik.values.name}
           onChange={formik.handleChange}
